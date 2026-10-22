@@ -60,7 +60,7 @@ button svg{width:22px;height:22px;fill:currentColor;filter:drop-shadow(0 1px 2px
 .seek:hover .tip,.seek.drag .tip{opacity:1;transform:translateX(-50%)}
 .time{font-variant-numeric:tabular-nums;font-size:13px;color:var(--dim);padding:0 8px;white-space:nowrap}
 .vol{display:flex;align-items:center}
-.menu{position:absolute;right:clamp(8px,2vw,24px);bottom:calc(clamp(8px,2vw,24px) + 112px);width:min(300px,calc(100% - 24px));padding:16px;border-radius:26px;transform-origin:bottom right;transform:translateZ(60px) scale(.7) translateY(14px);opacity:0;pointer-events:none;transition:transform .6s var(--spring),opacity .25s;z-index:4}
+.menu{position:absolute;right:clamp(8px,2vw,24px);bottom:calc(clamp(8px,2vw,24px) + var(--bh,100px) + 10px);width:min(clamp(270px,28vw,360px),calc(100% - 24px));max-height:calc(100% - var(--bh,100px) - 56px);overflow:auto;overscroll-behavior:contain;scrollbar-width:none;padding:16px;border-radius:26px;transform-origin:bottom right;transform:translateZ(60px) scale(.7) translateY(14px);opacity:0;pointer-events:none;transition:transform .6s var(--spring),opacity .25s;z-index:4}
 .menu.on{transform:translateZ(60px);opacity:1;pointer-events:auto}
 .menu h3{font-size:12px;font-weight:600;color:var(--dim);margin:0 4px 8px}
 .chips{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:12px;padding:4px;border-radius:16px;background:rgba(0,0,0,.28);box-shadow:inset 0 1px 3px rgba(0,0,0,.4)}
@@ -91,6 +91,14 @@ button svg{width:22px;height:22px;fill:currentColor;filter:drop-shadow(0 1px 2px
 @keyframes shine{to{background-position:-220% 0}}
 @keyframes pw{0%{opacity:0;transform:translateY(4px)}14%,86%{opacity:.75;transform:none}96%,100%{opacity:0;transform:none}}
 @media (max-height:480px){.sh{font-size:19px}.pw{display:none}}
+.start{position:absolute;left:50%;top:50%;width:clamp(78px,24vw,108px);height:clamp(78px,24vw,108px);margin:calc(clamp(78px,24vw,108px)/-2) 0 0 calc(clamp(78px,24vw,108px)/-2);min-width:0;padding:0;border-radius:50%;display:none;z-index:7}
+.start svg{width:42%;height:42%;margin-left:5%}
+.intro .start{display:grid;animation:breathe 2.8s ease-in-out infinite}
+.start:active{animation:none;transform:scale(.88)}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.intro .top,.intro .bar{opacity:0;pointer-events:none;transform:translate3d(0,14px,0) scale(.97)}
+.intro .menu{display:none}
+.stage.pseudo{position:fixed;inset:0;z-index:50;background:#000}
 .pop{position:absolute;inset:0;z-index:6;display:grid;place-items:center;background:rgba(0,0,0,.38);opacity:0;pointer-events:none;transition:opacity .4s;transform:translateZ(80px)}
 .pop.on{opacity:1;pointer-events:auto}
 .card{width:min(88%,400px);padding:26px;border-radius:30px;transform:scale(.85) translateY(24px) rotateX(10deg);opacity:0;transition:transform .7s var(--spring),opacity .3s}
@@ -107,9 +115,9 @@ button svg{width:22px;height:22px;fill:currentColor;filter:drop-shadow(0 1px 2px
 @keyframes pu{0%{opacity:0;transform:scale(.55)}25%{opacity:1}100%{opacity:0;transform:scale(1.45)}}
 .spin{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;animation:rot .8s linear infinite;opacity:0;transition:opacity .3s;pointer-events:none}
 .wait .spin{opacity:1}@keyframes rot{to{transform:rotate(360deg)}}
-@media (max-width:560px){.vol,#pip,.tot{display:none}.top{padding:8px 16px}.top h1{font-size:13px}.bar{padding:8px 10px 6px;border-radius:24px}button{min-width:44px;height:44px}#play{min-width:50px;height:50px}.time{padding:0 4px;font-size:12px}.menu{bottom:calc(clamp(8px,2vw,24px) + 100px);padding:12px;border-radius:22px}.chips button{height:38px}.opt{height:46px}}
+@media (max-width:560px){.vol,#pip,.tot{display:none}.top{padding:8px 16px}.top h1{font-size:13px}.bar{padding:8px 10px 6px;border-radius:24px}button{min-width:44px;height:44px}#play{min-width:50px;height:50px}.time{padding:0 4px;font-size:12px}.menu{padding:12px;border-radius:22px}.chips button{height:38px}.opt{height:46px}}
 @media (pointer:coarse){.seek{height:36px}.track{height:8px}.knob{transform:scale(.85)}.tip{bottom:42px}.seek.drag .track{height:12px}}
-@media (max-height:480px){.bar{padding:6px 14px 4px;border-radius:22px}button{height:38px;min-width:38px}#play{height:42px;min-width:42px}.top{padding:6px 14px}.menu{bottom:calc(clamp(8px,2vw,24px) + 80px);width:min(280px,50%)}.seek{height:20px}}
+@media (max-height:480px){.bar{padding:6px 14px 4px;border-radius:22px}button{height:38px;min-width:38px}#play{height:42px;min-width:42px}.top{padding:6px 14px}.menu{width:min(440px,calc(100% - 24px));display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;padding:10px 14px}.menu h3,.menu .chips{grid-column:1/-1}.menu .chips{margin-bottom:6px}.opt{height:38px}.chips button{height:30px}.seek{height:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
 </style>
 </head>
@@ -124,6 +132,7 @@ button svg{width:22px;height:22px;fill:currentColor;filter:drop-shadow(0 1px 2px
     <div class="fb l glass" id="fbl"></div><div class="fb r glass" id="fbr"></div>
     <div class="pulse glass" id="pulse"></div>
 
+    <button class="start glass" id="start" aria-label="Lancer la vidéo en plein écran"></button>
     <div class="top glass" id="top"><h1 id="title"></h1></div>
 
     <div class="menu glass" id="menu" role="dialog" aria-label="Réglages">
@@ -207,9 +216,11 @@ const rm=k=>{try{localStorage.removeItem(k)}catch(e){}};
 const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p||8)}catch(e){}};
 const fmt=s=>{if(!isFinite(s)||s<0)s=0;s=Math.floor(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),c=s%60;return(h?h+":"+String(m).padStart(2,"0"):m)+":"+String(c).padStart(2,"0")};
 const KEY="vp:pos:"+CONFIG.url;
+const MOBILE=matchMedia("(pointer:coarse)").matches&&Math.min(screen.width,screen.height)<=900;
+let introOn=MOBILE,needResume=false;if(MOBILE)pl.classList.add("intro");
 
 $("title").textContent=CONFIG.title;document.title=CONFIG.title;
-$("play").innerHTML=I.play;$("back").innerHTML=I.back;$("fwd").innerHTML=I.fwd;$("mute").innerHTML=I.vol;$("set").innerHTML=I.set;$("pip").innerHTML=I.pip;$("fs").innerHTML=I.fs;
+$("start").innerHTML=I.play;$("play").innerHTML=I.play;$("back").innerHTML=I.back;$("fwd").innerHTML=I.fwd;$("mute").innerHTML=I.vol;$("set").innerHTML=I.set;$("pip").innerHTML=I.pip;$("fs").innerHTML=I.fs;
 if(!document.pictureInPictureEnabled)$("pip").style.display="none";
 
 /* Réglages (mémorisés) */
@@ -223,7 +234,7 @@ applyS();
 
 const speeds=[.5,.75,1,1.25,1.5,2],chips=$("chips");
 speeds.forEach(s=>{const b=document.createElement("button");b.textContent=s+"×";b.onclick=()=>{v.playbackRate=s;buzz(6);[...chips.children].forEach((c,i)=>c.classList.toggle("sel",speeds[i]===s))};if(s===1)b.classList.add("sel");chips.appendChild(b)});
-const menu=$("menu");menu.querySelectorAll(".chips,.opt").forEach((e,i)=>e.style.setProperty("--i",i));
+const menu=$("menu");new ResizeObserver(()=>pl.style.setProperty("--bh",$("bar").offsetHeight+"px")).observe($("bar"));menu.querySelectorAll(".chips,.opt").forEach((e,i)=>e.style.setProperty("--i",i));
 function menuTo(on){menu.classList.toggle("on",on);$("set").setAttribute("aria-expanded",on);buzz(8);showUI(on)}
 $("set").onclick=e=>{e.stopPropagation();menuTo(!menu.classList.contains("on"))};
 pl.addEventListener("pointerdown",e=>{if(menu.classList.contains("on")&&!menu.contains(e.target)&&!$("set").contains(e.target))menuTo(false)});
@@ -235,7 +246,7 @@ if("mediaSession"in navigator)navigator.mediaSession.metadata=new MediaMetadata(
 v.addEventListener("loadedmetadata",()=>{
   $("dur").textContent=fmt(v.duration);if(checked)return;checked=true;
   let r=null;try{r=JSON.parse(ld(KEY)||"null")}catch(e){}
-  if(r&&r.t>10&&(!isFinite(v.duration)||r.t<v.duration-20)){savedT=r.t;$("rp").textContent="Vous vous étiez arrêté à "+fmt(r.t)+".";openPop("resume")}
+  if(r&&r.t>10&&(!isFinite(v.duration)||r.t<v.duration-20)){savedT=r.t;$("rp").textContent="Vous vous étiez arrêté à "+fmt(r.t)+".";if(introOn)needResume=true;else{v.pause();openPop("resume")}}
   else if(CONFIG.autoplay)v.play().catch(()=>{});
 });
 function openPop(id){const p=$(id);p.classList.add("on");buzz(12);showUI(true);setTimeout(()=>{const b=p.querySelector(".main");b&&b.focus({preventScroll:true})},80)}
@@ -299,9 +310,23 @@ document.querySelector(".vol").addEventListener("wheel",e=>{e.preventDefault();s
 $("mute").onclick=()=>{v.muted=!v.muted;buzz(6)};
 v.addEventListener("volumechange",()=>{$("mute").innerHTML=(v.muted||v.volume===0)?I.mute:(v.volume<.5?I.low:I.vol);const q=v.muted?0:v.volume;$("vf").style.transform="scaleX("+q+")";$("vk").style.left=$("vp").style.left=q*100+"%";$("vp").textContent=Math.round(q*100)+"%";vs.setAttribute("aria-valuenow",Math.round(q*100));sv("vp:vol",String(v.volume))});
 $("pip").onclick=async()=>{try{document.pictureInPictureElement?await document.exitPictureInPicture():await v.requestPictureInPicture()}catch(e){}};
-async function fs(){try{if(document.fullscreenElement||document.webkitFullscreenElement)(document.exitFullscreen||document.webkitExitFullscreen).call(document);else if(stage.requestFullscreen)await stage.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()}catch(e){}}
+const isFull=()=>!!(document.fullscreenElement||document.webkitFullscreenElement)||stage.classList.contains("pseudo");
+async function enterFull(){
+  let ok=false;
+  try{if(stage.requestFullscreen){await stage.requestFullscreen({navigationUI:"hide"});ok=true}else if(stage.webkitRequestFullscreen){stage.webkitRequestFullscreen();ok=true}}catch(e){}
+  if(!ok){stage.classList.add("pseudo","fsm");syncFs()}
+  try{await screen.orientation.lock("landscape")}catch(e){}
+}
+function exitFull(){
+  try{screen.orientation.unlock()}catch(e){}
+  if(stage.classList.contains("pseudo")){stage.classList.remove("pseudo","fsm");syncFs()}
+  else{try{(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(e){}}
+}
+const fs=()=>isFull()?exitFull():enterFull();
+$("start").onclick=()=>{introOn=false;pl.classList.remove("intro");buzz([10,30,14]);enterFull();if(needResume)openPop("resume");else v.play().catch(()=>{})};
 $("fs").onclick=()=>{buzz(8);fs()};
-document.addEventListener("fullscreenchange",()=>{const f=!!document.fullscreenElement;stage.classList.toggle("fsm",f);$("fs").innerHTML=f?I.fsx:I.fs;pl.style.transform=""});
+const syncFs=()=>{const f=!!document.fullscreenElement||stage.classList.contains("pseudo");stage.classList.toggle("fsm",f);$("fs").innerHTML=f?I.fsx:I.fs;pl.style.transform="";if(!f){try{screen.orientation.unlock()}catch(e){}}};
+document.addEventListener("fullscreenchange",syncFs);document.addEventListener("webkitfullscreenchange",syncFs);
 
 /* Auto-masquage */
 let ht=0;
@@ -322,6 +347,7 @@ pl.addEventListener("pointerleave",()=>{pl.classList.remove("tilt");pl.style.tra
 /* Double-tap / tap */
 let tapT=0,lastTap=0;
 v.addEventListener("pointerup",e=>{
+  if(introOn)return;
   if(e.pointerType==="mouse"&&e.button!==0)return;
   const n=Date.now(),b=v.getBoundingClientRect(),x=(e.clientX-b.left)/b.width;
   if(n-lastTap<300){clearTimeout(tapT);lastTap=0;if(x<.35)skip(-10);else if(x>.65)skip(10);else fs();return}
